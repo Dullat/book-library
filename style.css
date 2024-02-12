@@ -1,0 +1,172 @@
+* {
+  margin: 0 0 0 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 16px;
+  font-family: poppins;
+}
+
+header {
+  text-align: center;
+  padding: 1rem;
+}
+
+.actions {
+  position: sticky;
+  top: 0px;
+  box-shadow: 0px 10px 5px -7px rgba(0, 0, 0, .2);
+  /* z-index: -1; */
+}
+
+.actions>div {
+  padding: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: space-between;
+  top: 0;
+  background: #fdfdfd;
+}
+
+.filter-section {
+  position: relative;
+  padding: 0rem;
+  height: 2.5rem;
+  flex-grow: 1;
+}
+
+input,
+select{
+  font-family: poppins;
+  width: 100%;
+  height: 100%;
+  min-height: 2rem;
+  padding-inline: .8rem;
+  outline: none;
+  border: none;
+  border-radius: 1rem;
+  background-color: rgb(56, 121, 70);
+  color: #fdfdfd;
+}
+
+.filter-section>input::placeholder {
+  color: rgb(255, 255, 255);
+}
+
+.filter-btn {
+  position: absolute;
+  right: .5rem;
+  top: 50%;
+  padding: .1rem;
+  height: 1.7rem;
+  aspect-ratio: 1;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+/* dialog */
+
+.creation-dialog,
+.category-dialog{
+  text-align: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  padding: 1rem;
+  width: 80%;
+  max-width: 30rem;
+  background: white;
+  border: none;
+  border-radius: 1rem;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, .2);
+}
+
+.creation-dialog>div {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.creation-dialog>p {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 3rem;
+}
+
+.creation-dialog input,
+.creation-dialog select{
+  height: 2.5rem;
+  background-color: rgb(56, 121, 70);
+}
+
+.creation-dialog>div>div {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding-right: 1rem;
+}
+
+.create-category {
+  height: 2.5rem;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: green;
+  border-radius: 100vh;
+}
+
+.category-dialog > div{
+  display: grid;
+  gap: 1rem
+}
+
+@media screen and (max-width: 500px) {
+  .creation-dialog>div {
+    gap: 1rem;
+  }
+
+  .creation-dialog>p {
+    margin-bottom: 2rem;
+  }
+}
+
+/* category dialog*/
+
+
+
+/* utility */
+
+button {
+  background: #3B7C5D;
+  height: 2.5rem;
+  padding-inline: .8rem;
+  border: none;
+  border-radius: 1rem;
+  flex-grow: 1;
+  font-family: poppins;
+  font-weight: 600;
+  color: #fdfdfd;
+}
+
+/* later */
+
+.wrapper {
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.book-card {
+  background: #3B7C5D;
+  border-radius: 1rem;
+  display: grid;
+  gap: .7rem;
+  padding: 1rem;
+}

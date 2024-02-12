@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <title>HTML</title>
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <dialog class="category-dialog">
+    <div>
+      <p>create </p>
+      <input type="text" class="new-category" placeholder="cate name">
+      <button onclick="addCategory('yes')">Create</button>
+    </div>
+  </dialog>
+  <dialog class="creation-dialog">
+    <p>New book</p>
+    <div>
+      <input type="text" name="book-name" id="book-name" placeholder="Book-name">
+      <input type="text" name="author" id="author" placeholder="author">
+      <div>
+        <select name="created-category" id="created-category">created-category</select>
+        <div class="create-category" onclick="addCategory()">
+          +
+        </div>
+      </div>
+      <input type="number" name="pages" id="pages" placeholder="pages">
+      <button onclick="createBook()">create</button>
+    </div>
+    <data-list id="created-category">
+    </data-list>
+  </dialog>
+
+  <header>
+    <h1>Welcom to the Library</h1>
+  </header>
+
+  <div class="actions">
+    <div class="actions-primary">
+      <button onclick="openCreationDialog()">create new</button>
+      <button onclick="showLast()">show last</button>
+      <button class="book-index">total books: 0</button>
+    </div>
+    <div class="actions-secondary">
+      <div class="filter-section">
+        <input type="text" class="filter-search" placeholder="search">
+        <div class="filter-btn" onclick="filterBook()">
+          <svg fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <title>book-search</title>
+            <path
+              d="M15.5,12C18,12 20,14 20,16.5C20,17.38 19.75,18.21 19.31,18.9L22.39,22L21,23.39L17.88,20.32C17.19,20.75 16.37,21 15.5,21C13,21 11,19 11,16.5C11,14 13,12 15.5,12M15.5,14A2.5,2.5 0 0,0 13,16.5A2.5,2.5 0 0,0 15.5,19A2.5,2.5 0 0,0 18,16.5A2.5,2.5 0 0,0 15.5,14M6,22A2,2 0 0,1 4,20V4C4,2.89 4.9,2 6,2H7V9L9.5,7.5L12,9V2H18A2,2 0 0,1 20,4V11.81C18.83,10.69 17.25,10 15.5,10A6.5,6.5 0 0,0 9,16.5C9,18.81 10.21,20.85 12.03,22H6Z" />
+          </svg>
+        </div>
+      </div>
+      <button onclick="showAll()">show all</button>
+    </div>
+  </div>
+
+  <div class="wrapper"></div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

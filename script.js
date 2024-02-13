@@ -27,18 +27,47 @@ function openCreationDialog() {
   creationDialog.showModal();
 }
 
-function createCard(value) {
+function updateBook(eName, eAuthor, ePages, eCategory, index) {
+  bookArray[index].name = eName;
+  bookArray[index].author = eAuthor;
+  bookArray[index].pages = ePages;
+  bookArray[index].category = eCategory;
+  console.log(bookArray[index], index);
+
+  document.querySelectorAll('.edit-details').forEach(element => {
+    element.setAttribute('disabled','');
+    element.toggleAttribute('edit-mode');
+  });
+}
+
+function createCard(value, index) {
   let card = document.createElement('div');
-  card.innerHTML = `<p>Name : ${value.name}</p>
-      <p>
-        Author : ${value.author}
-      </p>
-      <p>
-        Pages : ${value.pages}
-      </p>
-      <p>
-        Category : ${value.category}
-      </p>`;
+  card.innerHTML = `
+      <div>
+        <label for="e-name">Name:</label>
+        <input type="text" value='${value.name}' class='edit-details' id="e-name" disabled>
+      </div>
+      <div>
+        <label for="e-author">Author:</label>
+        <input type="text" value='${value.author}' class='edit-details' id="e-author" disabled>
+      </div>
+      <div>
+        <label for="e-pages">Pages:</label>
+        <input type="text" value='${value.pages}' class='edit-details' id="e-pages" disabled>
+      </div>
+      <div>
+        <label for="e-category">Category:</label>
+        <input type="text" value='${value.category}' class='' id="e-category" disabled>
+      </div>
+      <div>
+        <button class='edit' onclick='editBook();'>edit</button>
+        <button class='update' onclick='updateBook(document.querySelector("#e-name").value,
+        document.querySelector("#e-author").value,
+        document.querySelector("#e-pages").value,
+        document.querySelector("#e-category").value,
+        ${index});'>update</button>
+      </div
+      `;
   card.classList.add('book-card');
 
   wrapper.appendChild(card);
@@ -48,7 +77,7 @@ function createBook() {
   bookArray[index] = new books(bookName.value, bookAuthor.value, bookCategory.value, bookPages.value);
   console.log(bookArray[index]);
   bookArray[index].addCategory();
-  createCard(bookArray[index]);
+  createCard(bookArray[index], index);
   
   index++;
   bookIndex.textContent = `total-books: ${index}`;
@@ -102,4 +131,18 @@ function showAll() {
 function showLast(){
   clear();
   createCard(bookArray[index - 1]);
+}
+
+function editBook() {
+  // document.querySelectorAll('.edit-details').removeAttribute('disabled');
+  document.querySelectorAll('.edit-details').forEach(element => {
+    element.removeAttribute('disabled');
+    element.toggleAttribute('edit-mode');
+  });
+
+  document.querySelector('.edit-details').focus();
+}
+
+function getEditIndex() {
+  console.log(document.querySelectorAll('.edit'));
 }

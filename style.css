@@ -170,3 +170,21 @@ button {
   gap: .7rem;
   padding: 1rem;
 }
+
+.book-card > div {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.book-card > div > input {
+  background-color: #3B7C5D;
+}
+
+.book-card > div > input[edit-mode] {
+  background-color: #4fa17a;
+}
+
+.book-card > div > button {
+  background: #4fa17a;
+}

@@ -1,4 +1,4 @@
-let wrapper = document.querySelector('.wrapper');
+const wrapper = document.querySelector('.wrapper');
 const creationDialog = document.querySelector('.creation-dialog');
 const bookName = document.querySelector('#book-name');
 const bookAuthor = document.querySelector('#author');
@@ -10,6 +10,7 @@ const bookIndex = document.querySelector('.book-index');
 const bookArray = [];
 const category = [];
 let index = 0;
+let shouldUpdate = false;
 
 function books(name, author, category, pages) {
   this.name = name;
@@ -20,53 +21,54 @@ function books(name, author, category, pages) {
 
 books.prototype.addCategory = function() {
   category.push(this.category);
-  console.log(category);
-}
+};
 
 function openCreationDialog() {
   creationDialog.showModal();
 }
 
-function updateBook(eName, eAuthor, ePages, eCategory, index) {
-  bookArray[index].name = eName;
-  bookArray[index].author = eAuthor;
-  bookArray[index].pages = ePages;
-  bookArray[index].category = eCategory;
-  console.log(bookArray[index], index);
+function updateBook(eName, eAuthor, ePages, i) {
+  bookArray[i].name = eName;
+  bookArray[i].author = eAuthor;
+  bookArray[i].pages = ePages;
 
-  document.querySelectorAll('.edit-details').forEach(element => {
+  document.querySelectorAll(`.edit-details-${i}`).forEach(element => {
     element.setAttribute('disabled','');
     element.toggleAttribute('edit-mode');
   });
+  console.log(bookArray);
+  let btn = document.querySelector(`#update-btn-${i}`);
+  btn.setAttribute('disabled','');
+  btn.style.opacity = '0';
+  document.querySelector(`.num-${i}`).style.opacity = '1';
 }
 
-function createCard(value, index) {
+function createCard(value, i) {
   let card = document.createElement('div');
   card.innerHTML = `
       <div>
         <label for="e-name">Name:</label>
-        <input type="text" value='${value.name}' class='edit-details' id="e-name" disabled>
+        <input type="text" value='${value.name}' class='edit-details-${i}' id="e-name-${i}" disabled focusonit>
       </div>
       <div>
         <label for="e-author">Author:</label>
-        <input type="text" value='${value.author}' class='edit-details' id="e-author" disabled>
+        <input type="text" value='${value.author}' class='edit-details-${i}' id="e-author-${i}" disabled>
       </div>
       <div>
         <label for="e-pages">Pages:</label>
-        <input type="text" value='${value.pages}' class='edit-details' id="e-pages" disabled>
+        <input type="text" value='${value.pages}' class='edit-details-${i}' id="e-pages-${i}" disabled>
       </div>
       <div>
         <label for="e-category">Category:</label>
-        <input type="text" value='${value.category}' class='' id="e-category" disabled>
+        <input type="text" value='${value.category}' class='' id="e-category-${i}" disabled>
       </div>
       <div>
-        <button class='edit' onclick='editBook();'>edit</button>
-        <button class='update' onclick='updateBook(document.querySelector("#e-name").value,
-        document.querySelector("#e-author").value,
-        document.querySelector("#e-pages").value,
-        document.querySelector("#e-category").value,
-        ${index});'>update</button>
-      </div
+        <button class='edit num-${i}' onclick='editBookBtn(${i});'>edit</button>
+        <button class='update' id='update-btn-${i}'  style='opacity: 0;' disabled onclick='updateBook(document.querySelector("#e-name-${i}").value,
+        document.querySelector("#e-author-${i}").value,
+        document.querySelector("#e-pages-${i}").value,
+        ${i});'>update</button>
+      </div>
       `;
   card.classList.add('book-card');
 
@@ -75,7 +77,6 @@ function createCard(value, index) {
 
 function createBook() {
   bookArray[index] = new books(bookName.value, bookAuthor.value, bookCategory.value, bookPages.value);
-  console.log(bookArray[index]);
   bookArray[index].addCategory();
   createCard(bookArray[index], index);
   
@@ -86,7 +87,6 @@ function createBook() {
 
 function addNewCategory(value){
   category.push(value);
-  console.log(category);
   
   category.forEach(e => {
     let option = document.createElement('option');
@@ -97,7 +97,6 @@ function addNewCategory(value){
 }
 
 function addCategory(create='no') {
-  console.log(create);
   if(create === 'yes'){
     addNewCategory(document.querySelector('.new-category').value);
     categoryDialog.close();
@@ -118,14 +117,14 @@ function filterBook() {
     if (document.querySelector('.filter-search').value === e.name){
       createCard(e);
     }
-  })
+  });
 }
 
 function showAll() {
   clear();
   bookArray.forEach((e) => {
     createCard(e);
-  })
+  });
 }
 
 function showLast(){
@@ -133,16 +132,15 @@ function showLast(){
   createCard(bookArray[index - 1]);
 }
 
-function editBook() {
-  // document.querySelectorAll('.edit-details').removeAttribute('disabled');
-  document.querySelectorAll('.edit-details').forEach(element => {
+function editBookBtn(i) {
+  document.querySelectorAll(`.edit-details-${i}`).forEach(element => {
     element.removeAttribute('disabled');
     element.toggleAttribute('edit-mode');
+    element.focus();
   });
-
-  document.querySelector('.edit-details').focus();
-}
-
-function getEditIndex() {
-  console.log(document.querySelectorAll('.edit'));
+  
+  let btn = document.querySelector(`#update-btn-${i}`);
+  btn.removeAttribute('disabled');
+  btn.style.opacity = '1';
+  document.querySelector(`.num-${i}`).style.opacity = '0';
 }
